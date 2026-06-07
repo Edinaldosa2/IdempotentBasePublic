@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "saveConnection": false,
+    "filePath": "C:\\Data\\dev-app.db",
+    "connectTimeoutSeconds": 30,
+    "applicationName": "IdempotentBase"
+  },
+  "prod": {
+    "saveConnection": false,
+    "filePath": "C:\\Data\\prod-app.db",
+    "connectTimeoutSeconds": 30,
+    "applicationName": "IdempotentBase"
+  },
+  "note": "SQLite schema scan/compare is coming soon. Connection testing is available."
+}

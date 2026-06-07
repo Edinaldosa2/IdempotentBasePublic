@@ -1,0 +1,26 @@
+{
+  "dev": {
+    "saveConnection": false,
+    "host": "localhost",
+    "port": 1521,
+    "connectionMode": "ServiceName",
+    "serviceName": "XEPDB1",
+    "databaseName": "XEPDB1",
+    "userName": "app_dev",
+    "password": "CHANGE_ME",
+    "connectTimeoutSeconds": 30,
+    "applicationName": "IdempotentBase"
+  },
+  "prod": {
+    "saveConnection": false,
+    "host": "oracle.example.com",
+    "port": 1521,
+    "connectionMode": "ServiceName",
+    "serviceName": "PROD_APP",
+    "databaseName": "PROD_APP",
+    "userName": "app_prod",
+    "password": "CHANGE_ME",
+    "connectTimeoutSeconds": 30,
+    "applicationName": "IdempotentBase"
+  }
+}

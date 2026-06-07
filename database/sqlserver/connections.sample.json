@@ -1,0 +1,39 @@
+{
+  "dev": {
+    "saveConnection": false,
+    "serverName": "localhost\\SQLEXPRESS",
+    "authenticationMode": "WindowsAuthentication",
+    "databaseName": "MyDevDb",
+    "encryptMode": "Mandatory",
+    "trustServerCertificate": true,
+    "connectTimeoutSeconds": 30,
+    "applicationName": "IdempotentBase"
+  },
+  "prod": {
+    "saveConnection": false,
+    "serverName": "mssql.example.com,51433",
+    "authenticationMode": "SqlServerAuthentication",
+    "userName": "app_prod",
+    "password": "CHANGE_ME",
+    "rememberPassword": true,
+    "databaseName": "MyProdDb",
+    "encryptMode": "Mandatory",
+    "trustServerCertificate": true,
+    "connectTimeoutSeconds": 30,
+    "applicationName": "IdempotentBase"
+  },
+  "backup": {
+    "saveConnection": false,
+    "serverName": "mssql.example.com,51433",
+    "authenticationMode": "SqlServerAuthentication",
+    "userName": "backup_operator",
+    "password": "CHANGE_ME",
+    "rememberPassword": true,
+    "databaseName": "MyProdDb",
+    "encryptMode": "Mandatory",
+    "trustServerCertificate": true,
+    "connectTimeoutSeconds": 30,
+    "applicationName": "IdempotentBase"
+  },
+  "note": "When Save connection is checked in the app, settings are written to database/sqlserver/connections.json."
+}

@@ -1,0 +1,36 @@
+﻿# === Segredos e dados locais do usuário ===
+database/**/connections.json
+**/connections.json
+!**/connections.sample.json
+*.env
+.env.*
+connection-strings.local.json
+**/secrets/
+
+# === Logs e runtime ===
+**/logs/
+*.log
+
+# === Releases binários (subir só no GitHub Releases, não no git) ===
+releases/
+releases/**
+
+# === Build temporário / lixo ===
+*.pdb
+*.tmp
+*.bak
+*.user
+*.suo
+.vs/
+bin/
+obj/
+
+# === Sistema operacional ===
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# === Opcional: se no futuro gerar staging fora de app/ ===
+staging/
+temp/

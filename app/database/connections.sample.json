@@ -1,0 +1,26 @@
+{
+  "dev": {
+    "saveConnection": false,
+    "serverName": "localhost\\SQLEXPRESS",
+    "authenticationMode": "WindowsAuthentication",
+    "databaseName": "MyDevDb",
+    "encryptMode": "Mandatory",
+    "trustServerCertificate": true,
+    "connectTimeoutSeconds": 30,
+    "applicationName": "IdempotentBase"
+  },
+  "prod": {
+    "saveConnection": false,
+    "serverName": "mssql.example.com,51433",
+    "authenticationMode": "SqlServerAuthentication",
+    "userName": "app_prod",
+    "password": "CHANGE_ME",
+    "rememberPassword": true,
+    "databaseName": "MyProdDb",
+    "encryptMode": "Mandatory",
+    "trustServerCertificate": true,
+    "connectTimeoutSeconds": 30,
+    "applicationName": "IdempotentBase"
+  },
+  "note": "Legacy sample. New per-provider samples live under database/sqlserver/, database/postgresql/, etc."
+}

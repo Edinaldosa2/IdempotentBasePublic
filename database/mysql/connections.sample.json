@@ -1,0 +1,26 @@
+{
+  "dev": {
+    "saveConnection": false,
+    "host": "localhost",
+    "port": 3306,
+    "databaseName": "dev_app",
+    "userName": "root",
+    "password": "CHANGE_ME",
+    "useSsl": false,
+    "characterSet": "utf8mb4",
+    "connectTimeoutSeconds": 30,
+    "applicationName": "IdempotentBase"
+  },
+  "prod": {
+    "saveConnection": false,
+    "host": "mysql.example.com",
+    "port": 3306,
+    "databaseName": "prod_app",
+    "userName": "app_prod",
+    "password": "CHANGE_ME",
+    "useSsl": true,
+    "characterSet": "utf8mb4",
+    "connectTimeoutSeconds": 30,
+    "applicationName": "IdempotentBase"
+  }
+}
