@@ -158,3 +158,13 @@ Then upload the ZIP from `releases\` to the matching GitHub Release.
 | `*.pdb`, logs, `.env` | No | Debug/runtime local data |
 
 Do **not** commit `database/**/connections.json` or real credentials.
+
+## GitHub SEO (description + topics)
+
+After changing the repository focus or keywords, refresh the GitHub About section:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File C:\Projetos\IdempotentBasePublic\util\set-github-seo.ps1
+```
+
+This sets the repository description and topics (`sqlserver`, `database`, `migration`, `idempotent`, `schema`, `backup`, `devops`, `dotnet`, `wpf`, `dba`, `database-tools`, `synchronization`, `ai`).

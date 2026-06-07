@@ -1,10 +1,16 @@
+<p align="center">
+  <img src="img/Banner.png" alt="IdempotentBase — database schema comparison, idempotent migration, synchronization and backup for SQL Server, PostgreSQL, MySQL, MariaDB and Oracle">
+</p>
+
 # IdempotentBase
 
-**Safe schema reconciliation and database backup for Windows.**
+**Safe schema reconciliation, database migration and backup for Windows — built for DBAs and DevOps teams.**
 
-IdempotentBase is a desktop application that helps teams compare development and production databases, generate idempotent reconciliation scripts, and run native SQL Server backups — without destructive surprises.
+IdempotentBase is a **.NET / WPF** desktop tool for **database schema comparison**, **idempotent SQL script generation**, **DEV ↔ PROD synchronization**, and **native SQL Server backup** — without destructive surprises.
 
-Built on **.NET Framework 4.8** and **WPF**, with a pluggable provider architecture for SQL Server, PostgreSQL, MySQL/MariaDB, Oracle, and more.
+Compare SQL Server, PostgreSQL, MySQL, MariaDB, and Oracle schemas. Generate safe, repeatable migration scripts. Protect production with a built-in safety model designed for real-world DBA workflows.
+
+> **Topics:** `sqlserver` · `database` · `migration` · `idempotent` · `schema` · `backup` · `devops` · `dotnet` · `wpf` · `dba` · `database-tools` · `synchronization` · `ai`
 
 ---
 
