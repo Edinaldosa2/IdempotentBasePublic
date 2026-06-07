@@ -1,4 +1,4 @@
-﻿# === Segredos e dados locais do usuário ===
+﻿# === Segredos e dados locais do usuario ===
 database/**/connections.json
 **/connections.json
 !**/connections.sample.json
@@ -11,11 +11,11 @@ connection-strings.local.json
 **/logs/
 *.log
 
-# === Releases binários (subir só no GitHub Releases, não no git) ===
+# === Releases binarios (subir so no GitHub Releases, nao no git) ===
 releases/
 releases/**
 
-# === Build temporário / lixo ===
+# === Build temporario / lixo ===
 *.pdb
 *.tmp
 *.bak

@@ -99,9 +99,8 @@ if (Test-Path $publishedConfig) {
 Get-ChildItem $AppOut -Filter "*.pdb" -Recurse | Remove-Item -Force
 Write-Host "Removed debug symbol files (.pdb) from app folder"
 
-Write-Step "Copying README and LICENSE"
-Copy-Item (Join-Path $DevRoot "README.md") (Join-Path $PublicRoot "README.md") -Force
-Copy-Item (Join-Path $DevRoot "LICENSE")   (Join-Path $PublicRoot "LICENSE")   -Force
+Write-Step "Copying LICENSE (keeping public README.md)"
+Copy-Item (Join-Path $DevRoot "LICENSE") (Join-Path $PublicRoot "LICENSE") -Force
 
 Write-Step "Copying documentation"
 Remove-TreeIfExists $DocsOut
