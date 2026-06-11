@@ -1,45 +1,56 @@
 <p align="center">
-  <img src="img/Banner.png" alt="IdempotentBase — database schema comparison, idempotent migration, synchronization and backup for SQL Server, PostgreSQL, MySQL, MariaDB and Oracle">
+  <img src="img/Banner.png" alt="IdempotentBase — safe database schema comparison, idempotent migration, synchronization and backup" width="100%">
+</p>
+
+<p align="center">
+  <strong>US</strong> <a href="README.md">English</a> |
+  <strong>BR</strong> <a href="README.pt-BR.md">Português</a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/Edinaldosa2/IdempotentBasePublic/releases"><img src="https://img.shields.io/github/v/release/Edinaldosa2/IdempotentBasePublic?label=release&color=0066cc" alt="Release"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License"></a>
+  <a href="https://dotnet.microsoft.com/download/dotnet-framework/net48"><img src="https://img.shields.io/badge/.NET%20Framework-4.8-512BD4" alt=".NET Framework 4.8"></a>
+  <img src="https://img.shields.io/badge/platform-Windows-0078D6" alt="Windows">
+  <img src="https://img.shields.io/badge/sqlserver-database%20tools-orange" alt="Database Tools">
+  <a href="https://github.com/Edinaldosa2"><img src="https://img.shields.io/badge/author-Edinaldosa2-blue" alt="Author"></a>
 </p>
 
 # IdempotentBase
 
-**Safe schema reconciliation, database migration and backup for Windows — built for DBAs and DevOps teams.**
+**Safe schema reconciliation, cross-provider migration and database backup for Windows — built for DBAs and DevOps teams.**
 
-IdempotentBase is a **.NET / WPF** desktop tool for **database schema comparison**, **idempotent SQL script generation**, **DEV ↔ PROD synchronization**, and **native SQL Server backup** — without destructive surprises.
+IdempotentBase is a **.NET / WPF** desktop tool for **database schema comparison**, **idempotent SQL script generation**, **DEV ↔ PROD synchronization**, **cross-provider migration**, and **native SQL Server backup** — without destructive surprises.
 
-Compare SQL Server, PostgreSQL, MySQL, MariaDB, and Oracle schemas. Generate safe, repeatable migration scripts. Protect production with a built-in safety model designed for real-world DBA workflows.
-
-> **Topics:** `sqlserver` · `database` · `migration` · `idempotent` · `schema` · `backup` · `devops` · `dotnet` · `wpf` · `dba` · `database-tools` · `synchronization` · `ai`
+Compare SQL Server, PostgreSQL, MySQL, MariaDB, and Oracle schemas. Generate safe, repeatable migration scripts. Export cross-provider DDL and batched INSERT scripts. Protect production with a built-in safety model designed for real-world DBA workflows.
 
 ---
 
 ## Table of Contents
 
-- [Download and Run](#download-and-run-recommended)
-- [Clone from Git](#clone-from-git-alternative)
+- [Download and Run](#download-and-run)
+- [Clone from Git](#clone-from-git)
 - [First Connection](#first-connection)
-- [Why IdempotentBase](#why-idempotentbase)
 - [Workflows](#workflows)
 - [Supported Providers](#supported-providers)
 - [Key Features](#key-features)
 - [Safety Model](#safety-model)
 - [Requirements](#requirements)
 - [Reconciliation Workflow](#reconciliation-workflow)
+- [Migration Workflow](#migration-workflow)
 - [Backup Workflow](#backup-workflow)
 - [Connection Storage](#connection-storage)
 - [Repository Layout](#repository-layout)
 - [Releases](#releases)
-- [Limitations](#limitations)
 - [Documentation](#documentation)
 - [License](#license)
 
 ---
 
-## Download and Run (recommended)
+## Download and Run
 
 1. Install [.NET Framework 4.8](https://dotnet.microsoft.com/download/dotnet-framework/net48) if it is not already on your machine.
-2. Download **IdempotentBase-v1.0.0-win-x64.zip** from [GitHub Releases](https://github.com/Edinaldosa2/IdempotentBasePublic/releases).
+2. Download **IdempotentBase-v1.0.1-win-x64.zip** from [GitHub Releases](https://github.com/Edinaldosa2/IdempotentBasePublic/releases).
 3. Extract the ZIP anywhere (for example `C:\Tools\IdempotentBase\`).
 4. Run the application:
 
@@ -51,9 +62,7 @@ The ZIP includes the executable, dependencies, documentation, and connection sam
 
 ---
 
-## Clone from Git (alternative)
-
-If you prefer to clone this repository instead of downloading the release ZIP:
+## Clone from Git
 
 ```powershell
 git clone https://github.com/Edinaldosa2/IdempotentBasePublic.git
@@ -67,8 +76,6 @@ No build step is required. The `app/` folder contains the ready-to-run distribut
 
 ## First Connection
 
-You can connect to a database in two ways:
-
 **Option A — Use the UI (recommended)**
 
 1. Launch `app\IdempotentBase.exe`.
@@ -78,98 +85,72 @@ You can connect to a database in two ways:
 
 **Option B — Start from a sample file**
 
-Copy a sample file and edit it with your connection details:
-
 ```powershell
 Copy-Item database\sqlserver\connections.sample.json database\sqlserver\connections.json
 ```
 
 Replace placeholder values in `connections.json`. Sample files contain no real credentials.
 
-Saved connections are stored under `database/{provider}/connections.json` (relative to the app folder). These files are local to your machine and must never be committed to git.
-
----
-
-## Why IdempotentBase
-
-Schema drift between DEV and PROD is one of the most common sources of deployment risk. Manual scripts are error-prone; full synchronization tools are often too aggressive.
-
-IdempotentBase takes a different approach:
-
-- **DEV is always the source of truth**; PROD is the target.
-- Differences are classified by safety before any SQL is generated.
-- Generated scripts are **idempotent** — safe to run more than once.
-- Destructive operations are **blocked by default** at comparison, generation, analysis, and UI layers.
-
 ---
 
 ## Workflows
 
-The home screen lets you choose what you want to do before selecting a database engine.
-
 | Workflow | Purpose |
 |----------|---------|
 | **Reconcile** | Compare DEV vs PROD schemas, generate idempotent scripts, export reports, apply safe changes |
-| **Backup** | Connect to a single database and run a native backup (SQL Server implemented; other engines planned) |
+| **Migrate** | Cross-provider schema and data export — generate target DDL and batched INSERT scripts |
+| **Backup** | Connect to a single database and run a native backup (SQL Server implemented) |
 
 ```
-Choose database  →  Reconcile or Backup  →  Connect  →  Compare / Run Backup
+Choose database  →  Reconcile, Migrate or Backup  →  Connect  →  Compare / Export / Run Backup
 ```
 
 ---
 
 ## Supported Providers
 
-| Provider | Connection | Schema scan & compare | Script generate & apply | Backup |
-|----------|:----------:|:---------------------:|:-----------------------:|:------:|
-| SQL Server | Yes | Yes | Yes | Yes |
-| PostgreSQL | Yes | Yes | Yes | Planned |
-| MySQL | Yes | Yes | Yes | Planned |
-| MariaDB | Yes | Yes | Yes | Planned |
-| Oracle | Yes | Yes | Yes | Planned |
-| SQLite | Yes | Coming Soon | Coming Soon | Planned |
-| MongoDB | Coming Soon | Coming Soon | Coming Soon | N/A |
+| Provider | Connection | Schema scan & compare | Script generate & apply | Cross-provider migrate | Backup |
+|----------|:----------:|:---------------------:|:-----------------------:|:----------------------:|:------:|
+| SQL Server | Yes | Yes | Yes | Yes | Yes |
+| PostgreSQL | Yes | Yes | Yes | Yes | Planned |
+| MySQL | Yes | Yes | Yes | Yes | Planned |
+| MariaDB | Yes | Yes | Yes | Yes | Planned |
+| Oracle | Yes | Yes | Yes | Yes | Planned |
+| SQLite | Yes | Coming Soon | Coming Soon | Planned | Planned |
+| MongoDB | Coming Soon | Coming Soon | Coming Soon | N/A | N/A |
 
-MariaDB reuses the MySQL provider stack internally. MongoDB is visible in the UI as **Coming Soon** because the relational reconciliation model does not map directly to document stores.
+MariaDB reuses the MySQL provider stack internally.
 
 ---
 
 ## Key Features
 
-### Provider selection
-
-- Home screen with database cards, logos, and **Available** / **Coming Soon** badges
-- Active provider shown in the application header
-- **Back** navigation to change provider without restarting
-
-### Professional connections
-
-- DBeaver-style panels per engine: host, port, database, authentication, SSL/encrypt options
-- SQL Server: Windows/SQL auth, encrypt modes, trust certificate, Advanced settings
-- PostgreSQL: SSL mode; MySQL/MariaDB: charset and SSL; Oracle: Service Name, SID, or TNS
-- Connection string preview tab with masked passwords
-- **Save connection** per environment, stored under `database/{provider}/`
-- **Refresh** to load database list from the server
-
 ### Schema reconciliation
 
-- Catalog metadata read into normalized `DatabaseSnapshot` objects
-- Compare tables, columns, keys, indexes, constraints, views, procedures, functions, triggers, sequences
-- SQL Server uses version-aware `sys.*` queries (compatible with SQL Server 2012+)
+- Compare tables, columns, keys, indexes, constraints, views, procedures, functions, triggers, and sequences
 - Safety classification: `SAFE_AUTO`, `REVIEW_REQUIRED`, `DESTRUCTIVE_BLOCKED`, `INFO_ONLY`
 - Idempotent script generation per dialect
 - Export Markdown, HTML, and JSON reports
-- Save JSON snapshots
-- Apply scripts to PROD with confirmation dialog, transaction wrapper, and audit history
+- Metadata read warnings surfaced during scan
+
+### Cross-provider migration (v1.0.1)
+
+- **Migrate** workflow on the home screen
+- Cross-provider type mapping and target DDL generation
+- Batched data export with INSERT script generation
+- SQL-only export mode for manual review before execution
 
 ### Database backup (SQL Server)
 
-- Single-connection backup workflow (no DEV/PROD split)
 - Native `BACKUP DATABASE TO DISK`
 - Configurable output folder with **Browse** picker
-- Optional compression (auto-fallback when edition does not support it)
-- Default path: `%LOCALAPPDATA%\IdempotentBase\backups\{provider}\`
-- Output file pattern: `{Database}_{yyyyMMdd_HHmmss}.bak`
+- Optional compression with auto-fallback
+
+### Professional connections
+
+- DBeaver-style panels per engine with SSL/encrypt options
+- Connection string preview with masked passwords
+- Per-provider connection storage under `database/{provider}/`
 
 ---
 
@@ -199,112 +180,82 @@ See [docs/safety-rules.md](docs/safety-rules.md) for the full rule set.
 | Runtime | [.NET Framework 4.8](https://dotnet.microsoft.com/download/dotnet-framework/net48) |
 | Databases | SQL Server, PostgreSQL, MySQL, or Oracle instance for testing |
 
-All database drivers are bundled with the application. No separate driver installation is required.
+All database drivers are bundled with the application.
 
 ---
 
 ## Reconciliation Workflow
 
-1. Open the app → **Choose your database** → select an engine (e.g. PostgreSQL).
-2. Ensure **Reconcile** is selected in the workflow switcher.
+1. Open the app → choose your database engine.
+2. Select **Reconcile** in the workflow switcher.
 3. Configure **DEV (Source)** and **PROD (Target)** connections.
 4. Click **Connect DEV** and **Connect PROD**.
-5. Review connection info (server, database, version, user, permission).
-6. Click **Compare Databases**.
-7. Wait for the scan to finish → **Show Result**.
-8. Filter differences, **Generate Idempotent Script**, review preview.
-9. **Save Script .sql** or **Apply to Target Database** (after backup confirmation).
+5. Click **Compare Databases** → review results.
+6. **Generate Idempotent Script** → save or apply (after backup confirmation).
 
-Use **← Back** to return to provider selection.
+---
+
+## Migration Workflow
+
+1. Open the app → choose source and target database engines.
+2. Select **Migrate** in the workflow switcher.
+3. Configure source and target connections.
+4. Run schema analysis and review generated target DDL.
+5. Export batched INSERT scripts or use SQL-only export mode for manual execution.
+
+Cross-provider migration maps types and generates conservative DDL. Review all output before running against production.
 
 ---
 
 ## Backup Workflow
 
-1. Open the app → **Choose your database** → select **SQL Server**.
-2. Select **Backup** in the workflow switcher.
-3. Configure the database connection (server, auth, database name).
-4. Set **Backup folder** (type a path or click **Browse...**).
-5. Optionally enable **Use compression (SQL Server)**.
-6. Click **Connect**.
-7. Click **Run Backup**.
-8. Confirm the `.bak` file path and size in the success dialog.
-
-Backups are written to the folder you chose. The default folder is created automatically under `%LOCALAPPDATA%\IdempotentBase\backups\sqlserver\`.
+1. Choose **SQL Server** → select **Backup**.
+2. Configure connection and backup folder.
+3. Click **Connect** → **Run Backup**.
+4. Confirm the `.bak` file path in the success dialog.
 
 ---
 
 ## Connection Storage
-
-Saved connections are stored per provider when **Save connection** is checked:
 
 ```
 database/
   sqlserver/connections.json
   postgresql/connections.json
   mysql/connections.json
-  mariadb/connections.json
-  oracle/connections.json
-  sqlite/connections.json
+  ...
 ```
 
-Sample files (no secrets):
+Samples (no secrets): [database/sqlserver/connections.sample.json](database/sqlserver/connections.sample.json)
 
-| Provider | Sample |
-|----------|--------|
-| SQL Server | [database/sqlserver/connections.sample.json](database/sqlserver/connections.sample.json) |
-| PostgreSQL | [database/postgresql/connections.sample.json](database/postgresql/connections.sample.json) |
-| MySQL | [database/mysql/connections.sample.json](database/mysql/connections.sample.json) |
-| MariaDB | [database/mariadb/connections.sample.json](database/mariadb/connections.sample.json) |
-| Oracle | [database/oracle/connections.sample.json](database/oracle/connections.sample.json) |
-| SQLite | [database/sqlite/connections.sample.json](database/sqlite/connections.sample.json) |
-| MongoDB | [database/mongodb/connections.sample.json](database/mongodb/connections.sample.json) |
-
-`connections.json` files contain credentials and are never included in this repository.
+`connections.json` files are local only and never committed to git.
 
 ---
 
 ## Repository Layout
-
-This repository is a **ready-to-run distribution package**, not a development workspace.
 
 ```
 IdempotentBasePublic/
 ├── app/          Executable, DLLs, assets, and embedded connection samples
 ├── database/     Connection samples (copy to connections.json locally)
 ├── docs/         Architecture, safety rules, metadata, roadmap
-├── util/         Maintainer build scripts (not needed to run the app)
-└── releases/     Local ZIP output for GitHub Releases (not tracked in git)
+├── img/          Banner and project images
+├── util/         Maintainer build scripts
+└── releases/     Local ZIP output (not tracked in git)
 ```
-
-Architecture details: [docs/architecture.md](docs/architecture.md)
 
 ---
 
 ## Releases
 
-Official downloads are published on [GitHub Releases](https://github.com/Edinaldosa2/IdempotentBasePublic/releases).
+Official downloads: [GitHub Releases](https://github.com/Edinaldosa2/IdempotentBasePublic/releases)
 
-| Version | Package |
-|---------|---------|
-| v1.0.0 | `IdempotentBase-v1.0.0-win-x64.zip` |
+| Version | Package | Highlights |
+|---------|---------|------------|
+| v1.0.1 | `IdempotentBase-v1.0.1-win-x64.zip` | Cross-provider Migrate workflow, MySQL catalog fixes |
+| v1.0.0 | `IdempotentBase-v1.0.0-win-x64.zip` | Initial public release |
 
-The ZIP is built locally into `releases/` by maintainers and uploaded to GitHub Releases manually. It is not stored in git.
-
-To rebuild or publish a new version, see [util/README.md](util/README.md).
-
----
-
-## Limitations
-
-- Backup is implemented for **SQL Server** only; other providers show a not-supported message
-- SQLite: connection works; schema scan/compare is Coming Soon
-- MongoDB: UI placeholder only; document-store reconciliation is not designed yet
-- No automatic data migration or seed synchronization
-- FK/PK creation may fail when existing data violates constraints
-- Cross-edition and cross-dialect feature gaps may require manual review
-- Module comparison uses normalized definition hashes (whitespace/comments ignored)
-- Extended properties and permissions are informational or review-only
+To rebuild or publish, see [util/README.md](util/README.md).
 
 ---
 
