@@ -50,7 +50,7 @@ Compare SQL Server, PostgreSQL, MySQL, MariaDB, and Oracle schemas. Generate saf
 ## Download and Run
 
 1. Install [.NET Framework 4.8](https://dotnet.microsoft.com/download/dotnet-framework/net48) if it is not already on your machine.
-2. Download **IdempotentBase-v1.0.1-win-x64.zip** from [GitHub Releases](https://github.com/Edinaldosa2/IdempotentBasePublic/releases).
+2. Download **IdempotentBase-v1.0.2-win-x64.zip** from [GitHub Releases](https://github.com/Edinaldosa2/IdempotentBasePublic/releases).
 3. Extract the ZIP anywhere (for example `C:\Tools\IdempotentBase\`).
 4. Run the application:
 
@@ -252,6 +252,7 @@ Official downloads: [GitHub Releases](https://github.com/Edinaldosa2/IdempotentB
 
 | Version | Package | Highlights |
 |---------|---------|------------|
+| v1.0.2 | `IdempotentBase-v1.0.2-win-x64.zip` | MySQL routine parameter scan fix (PARAMETER_DEFAULT) |
 | v1.0.1 | `IdempotentBase-v1.0.1-win-x64.zip` | Cross-provider Migrate workflow, MySQL catalog fixes |
 | v1.0.0 | `IdempotentBase-v1.0.0-win-x64.zip` | Initial public release |
 

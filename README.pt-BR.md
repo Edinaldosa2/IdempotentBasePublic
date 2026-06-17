@@ -50,7 +50,7 @@ Compare schemas de SQL Server, PostgreSQL, MySQL, MariaDB e Oracle. Gere scripts
 ## Download e execução
 
 1. Instale o [.NET Framework 4.8](https://dotnet.microsoft.com/download/dotnet-framework/net48), se ainda não tiver.
-2. Baixe **IdempotentBase-v1.0.1-win-x64.zip** em [GitHub Releases](https://github.com/Edinaldosa2/IdempotentBasePublic/releases).
+2. Baixe **IdempotentBase-v1.0.2-win-x64.zip** em [GitHub Releases](https://github.com/Edinaldosa2/IdempotentBasePublic/releases).
 3. Extraia em qualquer pasta (ex.: `C:\Tools\IdempotentBase\`).
 4. Execute:
 
@@ -245,6 +245,7 @@ Downloads oficiais: [GitHub Releases](https://github.com/Edinaldosa2/IdempotentB
 
 | Versão | Pacote | Destaques |
 |--------|--------|-----------|
+| v1.0.2 | `IdempotentBase-v1.0.2-win-x64.zip` | Correção no scan de parâmetros de rotinas MySQL (PARAMETER_DEFAULT) |
 | v1.0.1 | `IdempotentBase-v1.0.1-win-x64.zip` | Workflow Migrate cross-provider, correções MySQL |
 | v1.0.0 | `IdempotentBase-v1.0.0-win-x64.zip` | Release pública inicial |
 
