@@ -26,8 +26,42 @@ Compare schemas de SQL Server, PostgreSQL, MySQL, MariaDB e Oracle. Gere scripts
 
 ---
 
+## Screenshots
+
+### Escolha seu banco (Reconcile)
+
+Selecione o engine na grade de providers. A sidebar permite alternar entre **Reconcile**, **Backup** e **Migrate** sem reiniciar o app.
+
+<p align="center">
+  <img src="img/choose-database.png" alt="Seleção de provider no IdempotentBase — SQL Server, PostgreSQL, MySQL, MariaDB, Oracle, SQLite e MongoDB com badges Available e Coming Soon" width="90%">
+</p>
+
+### Migração cross-provider (Migrate)
+
+Escolha provider de origem e destino (MySQL, PostgreSQL, SQL Server e outros) e continue para configurar as conexões.
+
+<p align="center">
+  <img src="img/migrate-workflow.png" alt="Workflow Migrate do IdempotentBase — migração cross-provider de MySQL para PostgreSQL" width="90%">
+</p>
+
+---
+
+## Novidades na v1.0.2
+
+| Área | Atualização |
+|------|-------------|
+| **Shell desktop** | Sidebar com workflows **Reconcile**, **Backup** e **Migrate** |
+| **Seleção de provider** | Cards renovados com badges **Available** / **Coming Soon** |
+| **UI** | Layout em cards, botões glassmorphism e views de workflow consistentes |
+| **MySQL** | Correção no scan de parâmetros de rotinas — sem consulta a `PARAMETER_DEFAULT` |
+| **Migrate** | DDL cross-provider, exportação de INSERT em lotes e modo somente SQL |
+
+---
+
 ## Índice
 
+- [Screenshots](#screenshots)
+- [Novidades na v1.0.2](#novidades-na-v102)
 - [Download e execução](#download-e-execução)
 - [Clonar do Git](#clonar-do-git)
 - [Primeira conexão](#primeira-conexão)
@@ -95,14 +129,16 @@ Substitua os valores de exemplo. Os arquivos sample não contêm credenciais rea
 
 ## Workflows
 
+Use a **sidebar** para alternar workflows a qualquer momento. Cada workflow exibe dicas contextuais no rodapé da sidebar.
+
 | Workflow | Propósito |
 |----------|-----------|
-| **Reconcile** | Comparar schemas DEV vs PROD, gerar scripts idempotentes, exportar relatórios |
-| **Migrate** | Exportação cross-provider de schema e dados — DDL alvo e INSERTs em lotes |
-| **Backup** | Backup nativo em banco único (SQL Server implementado) |
+| **Reconcile** | Comparar schemas DEV vs PROD no mesmo engine, gerar scripts idempotentes, exportar relatórios |
+| **Backup** | Conectar a um SQL Server e executar `BACKUP DATABASE` nativo |
+| **Migrate** | Mover schema e dados entre providers — escolher origem/destino, gerar DDL e INSERTs em lotes |
 
 ```
-Escolher banco  →  Reconcile, Migrate ou Backup  →  Conectar  →  Comparar / Exportar / Backup
+Sidebar: Reconcile | Backup | Migrate  →  Escolher provider(s)  →  Conectar  →  Comparar / Exportar / Backup
 ```
 
 ---
@@ -124,6 +160,14 @@ MariaDB reutiliza internamente a stack MySQL.
 ---
 
 ## Recursos principais
+
+### Shell desktop (v1.0.2)
+
+- **Sidebar** — alterne Reconcile, Backup e Migrate de qualquer tela
+- **Cards de provider** — grade visual com logos e badges **Available** / **Coming Soon**
+- **Layout em cards** — estrutura consistente em conexão, scan e resultados
+- **Botões glassmorphism** — ações primárias com hierarquia visual clara
+- **Dicas de workflow** — rodapé da sidebar explica o objetivo do fluxo ativo
 
 ### Reconciliação de schema
 
@@ -245,7 +289,7 @@ Downloads oficiais: [GitHub Releases](https://github.com/Edinaldosa2/IdempotentB
 
 | Versão | Pacote | Destaques |
 |--------|--------|-----------|
-| v1.0.2 | `IdempotentBase-v1.0.2-win-x64.zip` | Correção no scan de parâmetros de rotinas MySQL (PARAMETER_DEFAULT) |
+| v1.0.2 | `IdempotentBase-v1.0.2-win-x64.zip` | Shell com sidebar, cards de provider, UI renovada, correção MySQL |
 | v1.0.1 | `IdempotentBase-v1.0.1-win-x64.zip` | Workflow Migrate cross-provider, correções MySQL |
 | v1.0.0 | `IdempotentBase-v1.0.0-win-x64.zip` | Release pública inicial |
 

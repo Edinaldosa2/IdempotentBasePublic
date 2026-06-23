@@ -26,8 +26,42 @@ Compare SQL Server, PostgreSQL, MySQL, MariaDB, and Oracle schemas. Generate saf
 
 ---
 
+## Screenshots
+
+### Choose your database (Reconcile)
+
+Pick a database engine from the provider grid. The sidebar lets you switch between **Reconcile**, **Backup**, and **Migrate** without restarting the app.
+
+<p align="center">
+  <img src="img/choose-database.png" alt="IdempotentBase provider selection — SQL Server, PostgreSQL, MySQL, MariaDB, Oracle, SQLite, and MongoDB cards with Available and Coming Soon badges" width="90%">
+</p>
+
+### Cross-provider migration (Migrate)
+
+Select source and target providers (MySQL, PostgreSQL, SQL Server, and more), then continue to connection setup for schema and data export.
+
+<p align="center">
+  <img src="img/migrate-workflow.png" alt="IdempotentBase Migrate workflow — cross-provider migration from MySQL to PostgreSQL" width="90%">
+</p>
+
+---
+
+## What's New in v1.0.2
+
+| Area | Update |
+|------|--------|
+| **Desktop shell** | Sidebar navigation with dedicated **Reconcile**, **Backup**, and **Migrate** workflows |
+| **Provider selection** | Refreshed database cards with **Available** / **Coming Soon** status badges |
+| **UI styling** | Card-based page layout, glassmorphism action buttons, and consistent workflow views |
+| **MySQL** | Fixed routine parameter scan — no longer queries `PARAMETER_DEFAULT` on unsupported servers |
+| **Migrate** | Cross-provider schema DDL generation, batched INSERT export, and SQL-only review mode |
+
+---
+
 ## Table of Contents
 
+- [Screenshots](#screenshots)
+- [What's New in v1.0.2](#whats-new-in-v102)
 - [Download and Run](#download-and-run)
 - [Clone from Git](#clone-from-git)
 - [First Connection](#first-connection)
@@ -95,14 +129,16 @@ Replace placeholder values in `connections.json`. Sample files contain no real c
 
 ## Workflows
 
+Use the **sidebar** to switch workflows at any time. Each workflow shows contextual help in the sidebar footer.
+
 | Workflow | Purpose |
 |----------|---------|
-| **Reconcile** | Compare DEV vs PROD schemas, generate idempotent scripts, export reports, apply safe changes |
-| **Migrate** | Cross-provider schema and data export — generate target DDL and batched INSERT scripts |
-| **Backup** | Connect to a single database and run a native backup (SQL Server implemented) |
+| **Reconcile** | Compare DEV vs PROD schemas on the same engine, generate idempotent scripts, export reports, apply safe changes |
+| **Backup** | Connect to a single SQL Server database and run a native `BACKUP DATABASE` |
+| **Migrate** | Move schema and data between different providers — pick source/target engines, generate DDL and batched INSERT scripts |
 
 ```
-Choose database  →  Reconcile, Migrate or Backup  →  Connect  →  Compare / Export / Run Backup
+Sidebar: Reconcile | Backup | Migrate  →  Choose provider(s)  →  Connect  →  Compare / Export / Backup
 ```
 
 ---
@@ -124,6 +160,14 @@ MariaDB reuses the MySQL provider stack internally.
 ---
 
 ## Key Features
+
+### Desktop shell (v1.0.2)
+
+- **Sidebar navigation** — switch between Reconcile, Backup, and Migrate from any screen
+- **Provider cards** — visual grid with per-engine logos and **Available** / **Coming Soon** badges
+- **Card-based layout** — consistent page structure across connection, scan, and result views
+- **Glassmorphism buttons** — modern primary actions with clear visual hierarchy
+- **Workflow hints** — sidebar footer explains the active workflow goal
 
 ### Schema reconciliation
 
@@ -252,7 +296,7 @@ Official downloads: [GitHub Releases](https://github.com/Edinaldosa2/IdempotentB
 
 | Version | Package | Highlights |
 |---------|---------|------------|
-| v1.0.2 | `IdempotentBase-v1.0.2-win-x64.zip` | MySQL routine parameter scan fix (PARAMETER_DEFAULT) |
+| v1.0.2 | `IdempotentBase-v1.0.2-win-x64.zip` | Desktop shell with sidebar, provider cards, UI refresh, MySQL parameter scan fix |
 | v1.0.1 | `IdempotentBase-v1.0.1-win-x64.zip` | Cross-provider Migrate workflow, MySQL catalog fixes |
 | v1.0.0 | `IdempotentBase-v1.0.0-win-x64.zip` | Initial public release |
 
